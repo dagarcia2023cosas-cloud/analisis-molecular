@@ -53,3 +53,29 @@ analisismolecular/
 - mdanalysis, prody, biopython (MD analysis)
 - numpy, scipy, pandas, matplotlib, seaborn, scikit-learn
 - torch (optional ML)
+
+---
+
+## Project organization (collaborative work)
+
+This repo is a clone of David García's project (`dagarcia2023cosas-cloud/analisismolecular`), where **Francisco Pinochet** and **David García** work together.
+
+### Instruction files structure
+
+| File | Purpose |
+|------|---------|
+| `.agents/AGENTS.md` | **General** project instructions (all agents) — this file must always be in **English** |
+| `usuarios/francisco.md` | **Individual** opencode instructions for Francisco |
+| `usuarios/david.md` | **Individual** opencode instructions for David |
+
+General instructions apply to every agent interaction with the project.
+Individual files contain personal preferences, contact info, and user-specific context.
+
+### Git remotes
+
+- `origin` → `https://github.com/dagarcia2023cosas-cloud/analisismolecular` (David)
+- `francisco` → `https://github.com/fpino73/analisismolecular` (Francisco's fork)
+
+**Workflow:**
+- Francisco: push to `francisco`, pull from `origin`
+- David: push/pull directly to `origin`
