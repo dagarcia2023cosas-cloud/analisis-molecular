@@ -19,8 +19,12 @@ env/
 .ipynb_checkpoints/
 *.ipynb_checkpoints/
 
-# IDE
-.vscode/
+# IDE (compartimos config de VS Code del proyecto)
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json
 .idea/
 *.swp
 *.swo

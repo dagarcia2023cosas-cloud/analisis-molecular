@@ -1,0 +1,38 @@
+# Normalizar line endings
+* text=auto
+
+# Python
+*.py text diff=python
+*.pyw text
+
+# Jupyter notebooks
+*.ipynb text
+
+# Markdown
+*.md text
+
+# YAML/TOML
+*.yml text
+*.yaml text
+*.toml text
+
+# Config
+*.cfg text
+*.ini text
+*.conf text
+
+# Batch/PowerShell
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# Shell scripts
+*.sh text eol=lf
+
+# Data files (binary)
+*.csv text
+*.mol binary
+*.sdf binary
+*.pdb binary
+*.xyz binary
+*.pkl binary
+*.h5 binary
