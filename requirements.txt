@@ -1,0 +1,29 @@
+# Core
+numpy>=1.24
+scipy>=1.10
+pandas>=2.0
+matplotlib>=3.7
+seaborn>=0.12
+scikit-learn>=1.2
+tqdm>=4.65
+
+# Computational chemistry (RDKit via conda recommended)
+# rdkit>=2022.9  # Install via conda: conda install -c conda-forge rdkit
+# openbabel>=3.1  # Install via conda: conda install -c conda-forge openbabel
+
+# Molecular dynamics / analysis
+# mdanalysis>=2.0  # conda install -c conda-forge mdanalysis
+# prody>=2.0
+# biopython>=1.81
+
+# ML / Deep learning
+# torch>=2.0
+
+# Visualization
+# nglview>=3.0
+# plotly>=5.14
+# ipywidgets>=8.0
+
+# Colab
+# google-colab>=1.0
+# ipython>=8.0
