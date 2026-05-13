@@ -77,5 +77,7 @@ Individual files contain personal preferences, contact info, and user-specific c
 - `francisco` → `https://github.com/fpino73/analisismolecular` (Francisco's fork)
 
 **Workflow:**
-- Francisco: push to `francisco`, pull from `origin`
-- David: push/pull directly to `origin`
+- **Francisco:** push to `francisco` (fork), create PR → David reviews & merges on GitHub
+- **David:** push/pull directly to `origin`, review & merge Francisco's PRs
+
+Since Francisco's token only has access to his own fork, he **cannot push directly** to `origin`. All his contributions go through **Pull Requests** that David must accept on GitHub. When opencode is asked to "pull/push to David's repo", it should push to `francisco` and provide a GitHub PR link.

@@ -22,6 +22,14 @@
 - Pull de `origin` para traer cambios de David
 - Sync a Colab para análisis con GPU
 
+## Pull requests a David
+Cuando le pidas a opencode que haga un "pull" al repo de David, **no debe hacer push directo a `origin`**. En su lugar:
+1. Push a `francisco` (fork propio)
+2. opencode debe **entregar un link** para crear el Pull Request manualmente en GitHub
+3. David revisa y acepta el PR desde su cuenta
+
+Esto porque el token de Francisco solo tiene acceso a su fork, no al repo original de David.
+
 ## Preferencias de comunicación
 - Idioma: español
 - Respuestas concisas (máx 4 líneas)
