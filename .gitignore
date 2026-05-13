@@ -40,6 +40,10 @@ data/raw/*
 data/external/*
 !data/external/.gitkeep
 
+# Uploads (archivos del usuario, se trackea .gitkeep solo)
+uploads/*
+!uploads/.gitkeep
+
 # Logs
 *.log
 
