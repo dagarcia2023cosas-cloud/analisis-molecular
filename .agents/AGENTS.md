@@ -53,3 +53,31 @@ analisismolecular/
 - mdanalysis, prody, biopython (MD analysis)
 - numpy, scipy, pandas, matplotlib, seaborn, scikit-learn
 - torch (optional ML)
+
+---
+
+## Project organization (collaborative work)
+
+This repo is a clone of David García's project (`dagarcia2023cosas-cloud/analisismolecular`), where **Francisco Pinochet** and **David García** work together.
+
+### Instruction files structure
+
+| File | Purpose |
+|------|---------|
+| `.agents/AGENTS.md` | **General** project instructions (all agents) — this file must always be in **English** |
+| `usuarios/francisco.md` | **Individual** opencode instructions for Francisco |
+| `usuarios/david.md` | **Individual** opencode instructions for David |
+
+General instructions apply to every agent interaction with the project.
+Individual files contain personal preferences, contact info, and user-specific context.
+
+### Git remotes
+
+- `origin` → `https://github.com/dagarcia2023cosas-cloud/analisismolecular` (David)
+- `francisco` → `https://github.com/fpino73/analisismolecular` (Francisco's fork)
+
+**Workflow:**
+- **Francisco:** push to `francisco` (fork), create PR → David reviews & merges on GitHub
+- **David:** push/pull directly to `origin`, review & merge Francisco's PRs
+
+Since Francisco's token only has access to his own fork, he **cannot push directly** to `origin`. All his contributions go through **Pull Requests** that David must accept on GitHub. When opencode is asked to "pull/push to David's repo", it should push to `francisco` and provide a GitHub PR link.
