@@ -1,0 +1,15 @@
+{
+  "repos": {},
+  "prs": {
+    "pr-1778652481931": {
+      "id": "pr-1778652481931",
+      "title": "Agregar carpeta usuarios/ y organización colaborativa en AGENTS.md",
+      "status": "open",
+      "branch": "fpino73:master",
+      "baseBranch": "master",
+      "createdAt": "2026-05-13T06:08:01.931Z"
+    }
+  },
+  "issues": {},
+  "version": "3.0.0"
+}

@@ -21,6 +21,8 @@
 | Paquete | `libreria_analisismolecular` |
 | Pipeline referencia | AI.zymes (Rosetta, ESMFold, ProteinMPNN, FieldTools) |
 | Química computacional | RDKit, OpenBabel, py3Dmol, MDAnalysis |
+| Análisis de cavidades | fpocket, CASTp (referencia) |
+| Electroestática | APBS, pdb2pqr, freesasa |
 | Visualización | py3Dmol, nglview, matplotlib, seaborn, plotly |
 | ML (opcional) | PyTorch, scikit-learn |
 | Editor | VS Code con extensiones recomendadas |
@@ -72,6 +74,12 @@
 
 **Hallazgo principal:** La expansión de cavidades catiónicas favorece el cuadrupolo de CO₂ sobre el enlace O-O de O₂, creando un mecanismo de secuestro electrostático.
 
+**Conclusiones de nuestra discusión:**
+- **Grupo III no sigue la tendencia:** A pesar de tener cavidades catiónicas expandidas, G-III no muestra correlación positiva con especificidad. Esto sugiere que el tamaño de cavidad por sí solo no explica la eficiencia.
+- **Cambio topológico de cavidades:** La evolución de G-II → G-I no solo agrandó cavidades, sino que transformó su geometría: de bolsas discretas y aisladas en G-II/G-III hacia un **túnel continuo** en G-I que conecta el sitio activo con la superficie de la proteína.
+- **Electrostatic steering:** El túnel catiónico en G-I funciona como un "embudo electrostático" que orienta y concentra CO₂ hacia el sitio activo, explicando la mayor especificidad.
+- **Implicancia directa:** Para diseño racional, no basta con agrandar cavidades — hay que asegurar conectividad topológica y gradiente electrostático direccional.
+
 **Métodos usados en el paper:**
 - Alineamiento múltiple (Clustal Omega)
 - Árbol filogenético (RAxML, LG substitution matrix)
@@ -98,6 +106,7 @@
 
 ### Fase 2: Aplicar a RuBisCO
 - [ ] Obtener estructuras PDB de RuBisCO de los grupos G-I a G-IV
+- [ ] Pipeline de análisis: fpocket → freesasa → APBS → Python
 - [ ] Reproducir análisis de cavidades cargadas (como Poudel et al.)
 - [ ] Calcular campos eléctricos catalíticos
 - [ ] Correlacionar estructura con especificidad
