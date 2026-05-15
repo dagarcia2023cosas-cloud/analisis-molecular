@@ -16,6 +16,11 @@ dependencies:
   - openbabel>=3.1
   - mdanalysis>=2.0
   - biopython>=1.81
+  - prody>=2.0
+  - fpocket>=3.1    # conda install -c conda-forge fpocket
+  - freesasa>=2.1   # conda install -c conda-forge freesasa
+  - pdb2pqr>=3.6    # conda install -c conda-forge pdb2pqr
+  - apbs>=3.4       # conda install -c conda-forge apbs
   - py3Dmol>=2.0
   - nglview>=3.0
   - plotly>=5.14
@@ -25,5 +30,4 @@ dependencies:
   - black>=23.0
   - ruff>=0.1
   - pip:
-    - prody>=2.0
     - -e .

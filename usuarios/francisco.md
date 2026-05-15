@@ -30,6 +30,11 @@ Cuando le pidas a opencode que haga un "pull" al repo de David, **no debe hacer 
 
 Esto porque el token de Francisco solo tiene acceso a su fork, no al repo original de David.
 
+## Límites del repositorio
+
+- **NO** agregar nada relacionado con "proyecto-claude-open-code" a este repo a menos que yo lo pida explícitamente.
+- Este repositorio es exclusivamente para el laboratorio de QM/Modelamiento Molecular.
+
 ## Preferencias de comunicación
 - Idioma: español
 - Respuestas concisas (máx 4 líneas)

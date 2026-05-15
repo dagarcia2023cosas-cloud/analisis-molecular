@@ -50,6 +50,9 @@ uploads/*
 # Colab
 colab/__pycache__/
 
+# Node / MCP servers
+node_modules/
+
 # Coverage
 htmlcov/
 .coverage
