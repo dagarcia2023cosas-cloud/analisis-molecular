@@ -266,14 +266,132 @@ A diferencia del diseño tradicional (que parte de una estructura fija e introdu
 
 **Ventaja:** Al variar continuamente la estructura de entrada (no partir siempre del mismo molde), se pueden explorar regiones del espacio de secuencias que serían inaccesibles en un solo ciclo de diseño.
 
-### 6.2 Selección de Boltzmann
+### 6.2 Selección de Boltzmann — Explicación detallada del proceso completo
 
-Es un método de selección probabilística inspirado en la distribución de Boltzmann de la física estadística:
+La selección en AI.zymes ocurre en **dos etapas consecutivas**: un filtro geométrico binario (pasa/no pasa) seguido de una selección probabilística de Boltzmann multiobjetivo.
 
-- A cada variante se le asigna una **probabilidad de ser seleccionada** proporcional a `exp(-score / T)`, donde `T` es la **temperatura de Boltzmann**.
-- A **T alta** (fase de exploración): las probabilidades son más uniformes → se seleccionan variantes diversas, incluso algunas sub-óptimas.
-- A **T baja** (fase de explotación): las probabilidades se concentran en las mejores variantes → selección altamente elitista.
-- AI.zymes reduce `T` gradualmente, pasando de explorar ampliamente el espacio a refinar las mejores soluciones.
+#### Etapa 1: Filtro geométrico (eliminación binaria)
+
+Antes de que la selección de Boltzmann siquiera evalúe las variantes, AI.zymes aplica un **filtro geométrico duro**:
+
+> Se eliminan automáticamente todas las variantes cuyos residuos catalíticos **no se alinean correctamente** con la geometría del estado de transición químico.
+
+**¿Qué significa esto en la práctica?** La enzima tiene residuos específicos que deben posicionarse de forma precisa con respecto al estado de transición para que la catálisis ocurra. Si una mutación desplaza estos residuos fuera de su posición óptima, la variante es **descartada inmediatamente**, sin importar qué tan buenas sean sus demás puntuaciones.
+
+**Analogía:** Es como la inspección técnica de un auto. Antes de evaluar rendimiento, consumo o velocidad, primero se revisa que tenga las 4 ruedas. Si le falta una, se descarta sin más trámite.
+
+En el caso del benchmark con KSI:
+- La base catalítica (Asp99) debe estar a una distancia y orientación precisas del enlace C─H del sustrato para desprotonarlo
+- El estado de transición (TS) modelado químicamente debe encajar en la geometría del sitio activo
+- Referencia del método usado: Rosetta EnzDes (Richter et al., *PLoS One* 2011)[24]
+
+Solo las variantes que **pasan este filtro geométrico** avanzan a la siguiente etapa.
+
+#### Etapa 2: Selección de Boltzmann multiobjetivo
+
+Una vez que solo quedan las variantes geométricamente viables, AI.zymes aplica una **selección probabilística** para decidir cuáles variantes serán rediseñadas en la siguiente iteración.
+
+**Paso 2a — Cálculo de puntuaciones (scoring)**
+
+Cada variante recibe **tres puntuaciones independientes**:
+
+| Puntuación | ¿Qué mide? | ¿Cómo se calcula? |
+|------------|-----------|-------------------|
+| **Interface score** (I_sc) | Fuerza de interacción entre el ligando (estado de transición) y la proteína | Rosetta Interface Analyzer: energía de unión proteína-ligando en unidades de energía de Rosetta (REU) |
+| **Stability score** | Estabilidad del plegamiento proteico | Evaluación de la energía total de la proteína tras relajación con RosettaRelax (REU) |
+| **Electric field score** | Intensidad del campo eléctrico catalítico a lo largo del enlace que se rompe | FieldTools: campo eléctrico efectivo (MV cm⁻¹) proyectado sobre el vector del enlace C─H escindible |
+
+**Paso 2b — Estandarización (Z-score)**
+
+Las tres puntuaciones tienen **escalas completamente diferentes** (REU vs. MV cm⁻¹). Para poder combinarlas, AI.zymes las **estandariza** a Z-scores:
+
+```
+Z = (valor - media_del_pool) / desviación_estándar_del_pool
+```
+
+Después de estandarizar, las tres puntuaciones están en la misma escala (centradas en 0, dispersión unitaria) y pueden sumarse.
+
+**Paso 2c — Puntuación combinada y "potencial" (forward-looking)**
+
+AI.zymes no selecciona basándose solo en la puntuación actual de una variante, sino en su **potencial**:
+
+```
+Potencial(variante X) = (score_combinado(X) + promedio_de_scores_combinados_de_sus_descendientes) / 2
+```
+
+Esto es **forward-looking** (prospectivo): si una variante no es excelente ahora, pero genera descendientes prometedores, su potencial es alto y puede ser seleccionada.
+
+**Analogía:** Es como elegir un padre en ganadería. No solo importa qué tan bueno es el toro, sino qué tan buenos han sido sus hijos. Un toro mediano que produce hijos excelentes vale más que uno excelente con hijos mediocres.
+
+**Paso 2d — La fórmula de Boltzmann**
+
+Una vez calculado el potencial de cada variante, se asigna una **probabilidad de selección** usando la distribución de Boltzmann:
+
+```
+P(variante i) = exp(-potencial_i / T) / Σ_j exp(-potencial_j / T)
+```
+
+Donde:
+- **P(variante i)** = probabilidad de que la variante `i` sea seleccionada para rediseño
+- **potencial_i** = puntuación forward-looking combinada (más negativo = mejor)
+- **T** = **temperatura de Boltzmann** (parámetro de control, NO es temperatura física)
+- El denominador es la suma sobre **todas** las variantes en el pool (normalización)
+
+**Paso 2e — El rol de la temperatura T**
+
+| Fase | T | Comportamiento | ¿Qué logra? |
+|------|---|---------------|-------------|
+| **Exploración** (inicio) | Alta (ej. T=10) | `exp(-score/10)` produce probabilidades similares para todas las variantes. Hasta una variante mediocre puede ser elegida. | Explora regiones diversas del espacio de secuencias. Evita converger prematuramente a un óptimo local. |
+| **Explotación** (final) | Baja (ej. T=1) | `exp(-score/1)` concentra la probabilidad fuertemente en las mejores variantes. Solo las élite sobreviven. | Refina las mejores soluciones encontradas. Explota el conocimiento acumulado. |
+
+AI.zymes **reduce T gradualmente** a lo largo de las iteraciones. Esto se llama **simulated annealing** (recocido simulado) y permite una transición suave de "probar de todo" a "pulir lo mejor".
+
+**Paso 2f — El sorteo**
+
+Finalmente, AI.zymes realiza un **sorteo ponderado**: cada variante es seleccionada con probabilidad proporcional a `exp(-potencial/T)`. Esto significa que:
+
+- Las variantes con **mejor puntuación** (potencial más negativo) tienen **mayor probabilidad**
+- Pero **ninguna variante** tiene probabilidad 0 (incluso la peor tiene chance, especialmente a T alta)
+- El número de variantes seleccionadas en cada iteración es fijo (parámetro configurable)
+
+Las variantes seleccionadas pasan a ESMFold (predicción estructural) y luego a RosettaRelax + rediseño, cerrando el ciclo.
+
+#### Resumen visual del proceso de selección
+
+```
+POOL de variantes
+    │
+    ▼
+[Etapa 1: FILTRO GEOMÉTRICO]
+  ¿Los residuos catalíticos están alineados con el TS?
+    │
+    ├── NO  → ❌ Descartada (no pasa a Boltzmann)
+    │
+    └── SÍ  → Pasa a Etapa 2
+                  │
+                  ▼
+          [Etapa 2: SELECCIÓN DE BOLTZMANN]
+            │
+            ├── Calcular Interface score (Rosetta)
+            ├── Calcular Stability score (RosettaRelax)
+            ├── Calcular Electric field score (FieldTools)
+            ├── Estandarizar (Z-scores)
+            ├── Calcular score combinado
+            ├── Calcular POTENCIAL (forward-looking)
+            ├── Aplicar Boltzmann: P ∝ exp(-potencial/T)
+            ├── Ajustar T (exploración → explotación)
+            └── Sortear variantes para rediseño
+                  │
+                  ▼
+          [ESMFold → RosettaRelax → Rediseño]
+```
+
+#### ¿Por qué este sistema es eficiente?
+
+1. **El filtro geométrico ahorra cómputo:** descarta rápidamente variantes inviables sin gastar recursos en calcularles todas las puntuaciones.
+2. **La estandarización permite combinar métricas incomparables:** no hay que elegir entre estabilidad o campo eléctrico; se optimizan ambos.
+3. **El potencial forward-looking evita descartar padres prometedores:** una variante que hoy tiene score medio pero produce hijos excelentes sobrevive.
+4. **La temperatura variable evita estancarse:** explora al principio, refina al final.
 
 ### 6.3 Campos eléctricos catalíticos
 
