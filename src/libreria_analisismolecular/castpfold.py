@@ -159,7 +159,7 @@ def _extract_job_id(response_text: str, pdb_name: str) -> Optional[str]:
         r'job[=:]\s*["\']?(\w+)["\']?',
         r'id[=:]\s*["\']?(\w+)["\']?',
         r'value=["\'](\w+)["\']',
-        f'{re.escape(pdb_name)}.*?(\w{{8,}})',
+        rf'{re.escape(pdb_name)}.*?(\w{{8,}})',
     ]:
         match = re.search(pattern, response_text, re.IGNORECASE)
         if match:

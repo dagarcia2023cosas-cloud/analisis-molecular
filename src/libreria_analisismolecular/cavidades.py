@@ -133,7 +133,7 @@ def plot_area_vs_s(
         s=100,
         ax=ax,
     )
-    ax.set_xlabel("Area de cavidad ($\AA^2$)")
+    ax.set_xlabel(r"Area de cavidad ($\AA^2$)")
     ax.set_ylabel("Especificidad CO$_2$/O$_2$ (S)")
     ax.set_title(title)
     ax.legend(title="Grupo")
