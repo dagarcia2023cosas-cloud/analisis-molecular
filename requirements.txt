@@ -1,31 +1,28 @@
 # Core
 numpy>=1.24
 scipy>=1.10
-pandas>=2.0,<3.0
+pandas>=2.0,<2.3
 matplotlib>=3.7
 seaborn>=0.12
 scikit-learn>=1.2
 tqdm>=4.65
+requests>=2.28
 
 # AI.zymes pipeline
-castpfoldpy>=0.1
-aizymes>=0.1
 fair-esm>=2.0
 transformers>=4.49
 torch>=2.0
+# NOTA: CASTpFold se usa via requests directo (no castpfoldpy)
+# NOTA: FieldTools implementado en modulo propio (ai_zymes.py)
 
 # Computational chemistry
 biopython>=1.81
 prody>=2.0
 mdanalysis>=2.0
 rdkit>=2023.9
-# openbabel>=3.1  # Install via conda: conda install -c conda-forge openbabel
 
-# Electrostatics (via conda)
-# fpocket>=3.1    # Legacy — replaced by CASTpFold
-# freesasa>=2.1   # conda install -c conda-forge freesasa
-# pdb2pqr>=3.6    # conda install -c conda-forge pdb2pqr
-# apbs>=3.4       # conda install -c conda-forge apbs
+# Electrostatics (via condacolab en Colab)
+# apbs, pdb2pqr, freesasa
 
 # Visualization
 # nglview>=3.0
