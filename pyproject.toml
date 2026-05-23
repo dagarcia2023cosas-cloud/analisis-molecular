@@ -5,11 +5,11 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "libreria_analisismolecular"
 version = "0.1.0"
-description = "Librería para análisis molecular computacional con integración nativa para Google Colab"
+description = "Libreria para analisis molecular computacional con integracion nativa para Google Colab"
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
-keywords = ["molecular-analysis", "computational-chemistry", "colab", "cheminformatics"]
+keywords = ["molecular-analysis", "computational-chemistry", "colab", "castpfold"]
 
 authors = [
     {name = "analisismolecular"},
@@ -37,58 +37,27 @@ dependencies = [
     "requests>=2.28",
     "biopython>=1.81",
     "prody>=2.0",
-    "mdanalysis>=2.0",
-    "torch>=2.0",
-    "fair-esm>=2.0",
-    "transformers>=4.49",
 ]
 
 [project.optional-dependencies]
 colab = [
-    "google-colab>=1.0",
-    "ipython>=8.0",
-    "ipywidgets>=8.0",
     "py3Dmol>=2.0",
     "nglview>=3.0",
     "plotly>=5.14",
     "rdkit>=2023.9",
-    "condacolab>=0.1",
-]
-visualization = [
-    "py3Dmol>=2.0",
-    "nglview>=3.0",
-    "plotly>=5.14",
     "ipywidgets>=8.0",
 ]
-chemistry = [
-    "rdkit>=2023.9",
-    "openbabel>=3.1",
-    "mdanalysis>=2.0",
-    "prody>=2.0",
-    "biopython>=1.81",
-]
-ai_zymes = [
-    "fair-esm>=2.0",
-    "transformers>=4.49",
-    "torch>=2.0",
-]
-rosetta = [
-    "pyrosetta-installer>=0.1",
+castpfold = [
+    "requests>=2.28",
 ]
 full = [
     "py3Dmol>=2.0",
     "nglview>=3.0",
     "plotly>=5.14",
-    "ipywidgets>=8.0",
     "rdkit>=2023.9",
-    "openbabel>=3.1",
+    "ipywidgets>=8.0",
     "mdanalysis>=2.0",
-    "prody>=2.0",
-    "biopython>=1.81",
     "pymol-open-source>=2.5",
-    "fair-esm>=2.0",
-    "transformers>=4.49",
-    "torch>=2.0",
 ]
 dev = [
     "pytest>=7.0",

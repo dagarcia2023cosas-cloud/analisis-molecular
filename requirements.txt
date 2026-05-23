@@ -1,39 +1,28 @@
 # Core
 numpy>=1.24
 scipy>=1.10
-pandas>=2.0,<2.3
 matplotlib>=3.7
 seaborn>=0.12
 scikit-learn>=1.2
 tqdm>=4.65
 requests>=2.28
 
-# AI.zymes pipeline
-fair-esm>=2.0
-transformers>=4.49
-torch>=2.0
-# NOTA: CASTpFold se usa via requests directo (no castpfoldpy)
-# NOTA: FieldTools implementado en modulo propio (ai_zymes.py)
-
-# Computational chemistry
+# Molecular
 biopython>=1.81
 prody>=2.0
-mdanalysis>=2.0
-rdkit>=2023.9
 
-# Electrostatics (via condacolab en Colab)
-# apbs, pdb2pqr, freesasa
+# CASTpFold (via requests directo, no castpfoldpy)
+# Eliminado: fair-esm, torch, transformers -> los maneja AIzymes
+# Eliminado: aizymes, castpfoldpy
+# Eliminado: pandas -> Colab ya tiene 2.2.2
 
 # Visualization
+# rdkit>=2023.9
 # nglview>=3.0
 # plotly>=5.14
-# ipywidgets>=8.0
 # py3Dmol>=2.0
 
-# Rosetta (optional, heavy)
-# pyrosetta-installer>=0.1
-
-# Colab
-# google-colab>=1.0
-# ipython>=8.0
-# condacolab>=0.1
+# Old dependencies (moved to AIzymes)
+# torch>=2.0
+# fair-esm>=2.0
+# transformers>=4.49
