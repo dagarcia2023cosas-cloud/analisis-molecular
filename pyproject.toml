@@ -35,6 +35,14 @@ dependencies = [
     "seaborn>=0.12",
     "scikit-learn>=1.2",
     "tqdm>=4.65",
+    "castpfoldpy>=3.0",
+    "aizymes>=0.1",
+    "fair-esm>=2.0",
+    "transformers>=4.49",
+    "torch>=2.0",
+    "biopython>=1.81",
+    "prody>=2.0",
+    "mdanalysis>=2.0",
 ]
 
 [project.optional-dependencies]
@@ -42,17 +50,51 @@ colab = [
     "google-colab>=1.0",
     "ipython>=8.0",
     "ipywidgets>=8.0",
+    "py3Dmol>=2.0",
+    "nglview>=3.0",
+    "plotly>=5.14",
+    "rdkit-pypi>=2022.9",
+    "condacolab>=0.1",
+]
+visualization = [
+    "py3Dmol>=2.0",
+    "nglview>=3.0",
+    "plotly>=5.14",
+    "ipywidgets>=8.0",
+]
+chemistry = [
+    "rdkit-pypi>=2022.9",
+    "openbabel>=3.1",
+    "mdanalysis>=2.0",
+    "prody>=2.0",
+    "biopython>=1.81",
+]
+ai_zymes = [
+    "fair-esm>=2.0",
+    "transformers>=4.49",
+    "torch>=2.0",
+    "aizymes>=0.1",
+    "castpfoldpy>=3.0",
+]
+rosetta = [
+    "pyrosetta-installer>=0.1",
 ]
 full = [
-    "torch>=2.0",
+    "py3Dmol>=2.0",
+    "nglview>=3.0",
+    "plotly>=5.14",
+    "ipywidgets>=8.0",
     "rdkit-pypi>=2022.9",
     "openbabel>=3.1",
     "mdanalysis>=2.0",
     "prody>=2.0",
     "biopython>=1.81",
     "pymol-open-source>=2.5",
-    "nglview>=3.0",
-    "plotly>=5.14",
+    "fair-esm>=2.0",
+    "transformers>=4.49",
+    "torch>=2.0",
+    "aizymes>=0.1",
+    "castpfoldpy>=3.0",
 ]
 dev = [
     "pytest>=7.0",

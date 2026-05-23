@@ -7,27 +7,36 @@ seaborn>=0.12
 scikit-learn>=1.2
 tqdm>=4.65
 
-# Computational chemistry (RDKit via conda recommended)
+# AI.zymes pipeline
+castpfoldpy>=3.0
+aizymes>=0.1
+fair-esm>=2.0
+transformers>=4.49
+torch>=2.0
+
+# Computational chemistry
+biopython>=1.81
+prody>=2.0
+mdanalysis>=2.0
 # rdkit>=2022.9  # Install via conda: conda install -c conda-forge rdkit
 # openbabel>=3.1  # Install via conda: conda install -c conda-forge openbabel
 
-# Molecular dynamics / analysis
-mdanalysis>=2.0
-prody>=2.0
-biopython>=1.81
-fpocket>=3.1
-freesasa>=2.1
-pdb2pqr>=3.6
-apbs>=3.4
-
-# ML / Deep learning
-# torch>=2.0
+# Electrostatics (via conda)
+# fpocket>=3.1    # Legacy — replaced by CASTpFold
+# freesasa>=2.1   # conda install -c conda-forge freesasa
+# pdb2pqr>=3.6    # conda install -c conda-forge pdb2pqr
+# apbs>=3.4       # conda install -c conda-forge apbs
 
 # Visualization
 # nglview>=3.0
 # plotly>=5.14
 # ipywidgets>=8.0
+# py3Dmol>=2.0
+
+# Rosetta (optional, heavy)
+# pyrosetta-installer>=0.1
 
 # Colab
 # google-colab>=1.0
 # ipython>=8.0
+# condacolab>=0.1

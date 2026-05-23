@@ -19,12 +19,8 @@ env/
 .ipynb_checkpoints/
 *.ipynb_checkpoints/
 
-# IDE (compartimos config de VS Code del proyecto)
-.vscode/*
-!.vscode/settings.json
-!.vscode/extensions.json
-!.vscode/tasks.json
-!.vscode/launch.json
+# IDE
+.vscode/
 .idea/
 *.swp
 *.swo
@@ -34,21 +30,11 @@ env/
 .DS_Store
 Thumbs.db
 
-# Data (ignorar datos crudos, mantener procesados)
-data/raw/*
-!data/raw/.gitkeep
-data/external/*
-!data/external/.gitkeep
-
-# Uploads (archivos del usuario, se trackea .gitkeep solo)
-uploads/*
-!uploads/.gitkeep
+# PDFs pesados (no versionar)
+*.pdf
 
 # Logs
 *.log
-
-# Colab
-colab/__pycache__/
 
 # Node / MCP servers
 node_modules/

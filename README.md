@@ -1,88 +1,58 @@
 # analisismolecular
 
-Proyecto de análisis molecular computacional con integración nativa para Google Colab.
+Proyecto de analisis molecular computacional — RuBisCO.
+Universidad de Concepcion, Laboratorio de Quimica Cuantica y Modelamiento Molecular.
 
-## Estructura del proyecto
+## Flujo de trabajo
 
 ```
-analisismolecular/
-├── src/
-│   └── libreria_analisismolecular/   # Paquete principal
-│       ├── __init__.py
-│       ├── utils.py                  # Utilidades generales
-│       └── colab/                    # Integración con Google Colab
-│           ├── __init__.py
-│           ├── setup.py              # Configuración del entorno Colab
-│           ├── drive_utils.py        # Montaje y uso de Google Drive
-│           └── visualization.py      # Visualización molecular 3D
-├── colab/
-│   └── setup_colab.py               # Script autónomo para Colab
-├── notebooks/
-│   ├── 00_colab_setup.ipynb          # Setup inicial para Colab
-│   └── 01_molecular_analysis_intro.ipynb  # Introducción al análisis
-├── data/
-│   ├── raw/                          # Datos crudos
-│   ├── processed/                    # Datos procesados
-│   └── external/                     # Datos externos
-├── tests/
-│   └── test_colab.py
-├── requirements.txt
-├── environment.yml
-├── pyproject.toml
-└── .gitignore
+VS Code (interfaz)  →  Google Colab (GPU)  →  GitHub (respaldo)
+   escribir codigo       correr analisis        versionado
+   editar notebooks      visualizar resultados  portabilidad
 ```
 
-## Uso en Google Colab
+## Estructura
 
-### Opción 1: Notebook de setup (recomendada)
-
-1. Sube el notebook `notebooks/00_colab_setup.ipynb` a Google Colab
-2. Ejecuta las celdas en orden
-
-### Opción 2: Script directo
-
-En una celda de Colab:
-
-```python
-!wget -q https://raw.githubusercontent.com/tu-usuario/analisismolecular/main/colab/setup_colab.py
-from setup_colab import setup
-setup(install_full=True)
+```
+rubisco/
+├── papers/              ← Resumenes de papers base (AI.zymes, Poudel 2020)
+├── src/                 ← Codigo Python (libreria analisismolecular)
+├── notebooks/           ← Notebooks para abrir en Colab
+├── scripts/             ← Scripts de automatizacion
+├── tests/               ← Tests unitarios
+├── PLAN.md              ← Plan de aprendizaje
+├── bitacora.md          ← Registro de sesiones
+├── pyproject.toml       ← Config del paquete
+└── requirements.txt     ← Dependencias
 ```
 
-### Opción 3: Instalación manual
+## Empezar en 3 pasos
 
-```python
-!git clone https://github.com/tu-usuario/analisismolecular.git /content/analisismolecular
-%cd /content/analisismolecular
-!pip install -q -e .
-!pip install -q py3Dmol nglview plotly ipywidgets prody biopython rdkit-pypi
-```
-
-## Instalación local
-
+### 1. Local (VS Code)
 ```bash
-# Clonar el repositorio
-git clone https://github.com/tu-usuario/analisismolecular.git
-cd analisismolecular
-
-# Opción 1: pip
+cd investigacion/rubisco
 pip install -e .
-
-# Opción 2: conda (recomendada para RDKit)
-conda env create -f environment.yml
-conda activate analisismolecular
 ```
 
-## Dependencias principales
+### 2. Colab (GPU)
+Abrir `notebooks/00_setup.ipynb` en Google Colab y ejecutar las celdas en orden.
 
-- **RDKit** — Cheminformatics y química computacional
-- **OpenBabel** — Interconversión de formatos moleculares
-- **py3Dmol / nglview** — Visualización 3D de moléculas
-- **MDAnalysis / ProDy** — Análisis de dinámica molecular
-- **PyTorch** — Deep learning (opcional)
-- **NumPy, SciPy, Pandas** — Cómputo científico
-- **Matplotlib, Seaborn, Plotly** — Visualización de datos
+### 3. GitHub (respaldo)
+```bash
+git add -A
+git commit -m "descripcion"
+git push
+```
 
-## Licencia
+## Papers base
 
-MIT
+- **AI.zymes** (Merlicek 2025): `papers/ayzmes_2025.md` — diseño evolutivo de enzimas
+- **Poudel 2020**: `papers/poudel_2020.md` — cavidades catiónicas en RuBisCO
+
+## Plan de aprendizaje
+
+Ver `PLAN.md` para las sesiones ordenadas por nivel.
+
+---
+
+*Ultima actualizacion: Mayo 2026*
