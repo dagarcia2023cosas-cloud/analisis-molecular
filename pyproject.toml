@@ -35,7 +35,7 @@ dependencies = [
     "seaborn>=0.12",
     "scikit-learn>=1.2",
     "tqdm>=4.65",
-    "castpfoldpy>=3.0",
+    "castpfoldpy>=0.1",
     "aizymes>=0.1",
     "fair-esm>=2.0",
     "transformers>=4.49",
@@ -74,7 +74,7 @@ ai_zymes = [
     "transformers>=4.49",
     "torch>=2.0",
     "aizymes>=0.1",
-    "castpfoldpy>=3.0",
+    "castpfoldpy>=0.1",
 ]
 rosetta = [
     "pyrosetta-installer>=0.1",
@@ -94,7 +94,7 @@ full = [
     "transformers>=4.49",
     "torch>=2.0",
     "aizymes>=0.1",
-    "castpfoldpy>=3.0",
+    "castpfoldpy>=0.1",
 ]
 dev = [
     "pytest>=7.0",
