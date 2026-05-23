@@ -1,7 +1,7 @@
 # Core
 numpy>=1.24
 scipy>=1.10
-pandas>=2.0
+pandas>=2.0,<3.0
 matplotlib>=3.7
 seaborn>=0.12
 scikit-learn>=1.2
@@ -18,7 +18,7 @@ torch>=2.0
 biopython>=1.81
 prody>=2.0
 mdanalysis>=2.0
-# rdkit>=2022.9  # Install via conda: conda install -c conda-forge rdkit
+rdkit>=2023.9
 # openbabel>=3.1  # Install via conda: conda install -c conda-forge openbabel
 
 # Electrostatics (via conda)
